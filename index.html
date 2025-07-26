@@ -1,0 +1,350 @@
+<div style="text-align:center;">
+<img style="width:30%;"src="https://static.vecteezy.com/system/resources/previews/036/028/197/non_2x/nature-beauty-logo-creative-leaf-color-gradient-gold-fashion-lotus-design-concept-elegant-vector.jpg"></DIV>
+ <style>
+    body {
+     margin: 0;
+      height:500px
+      background-image: url('https://www.shutterstock.com/image-photo/hd-wallpaper-mountains-landscapes-moon-260nw-2389525731.jpg');
+background-repeat: no-repeat;
+    }
+  </style>
+
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      
+      
+      overflow-x: hidden;
+    }
+
+    .topnav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.7);
+      z-index: 1000;
+    }
+
+    #openNavBtn {
+      background: linear-gradient(45deg, #f06, #f79);
+      border: none;
+      color: white;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      position: relative;
+      overflow: visible;
+      box-shadow: 0 0 10px #f06;
+      user-select: none;
+    }
+
+    #openNavBtn:hover {
+      background: linear-gradient(45deg, #f79, #f06);
+    }
+
+    .sidenav {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      height: 0;
+      
+      overflow: hidden;
+      transition: height 0.4s ease;
+      z-index: 900;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+    }
+
+    .sidenav.open {
+      height: 180px;
+    }
+
+    .sidenav a {
+      display: block;
+      padding: 15px 30px;
+      
+      font-size: 18px;
+      text-decoration: none;
+      border-bottom: 1px solid #333;
+      transition: background-color 0.3s;
+    }
+
+    .sidenav a:hover {
+      background-color: #f06;
+      color: white;
+    }
+
+    /* Spark star styles */
+    .spark-star {
+      position: absolute;
+      font-size: 10px;
+      color: gold;
+      animation: star-fly 0.7s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes star-fly {
+      0% {
+        opacity: 1;
+        transform: scale(1) translate(0, 0) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.5) translate(var(--x), var(--y)) rotate(360deg);
+      }
+    }
+  </style>
+
+<body>
+
+  <div class="topnav">
+    <button id="openNavBtn">✨ Menu</button>
+  </div>
+
+  <div id="mySidenav" class="sidenav">
+   <a  href="index.html">HOME</a>
+<a  href="about.html">ABOUT</a>
+<a href="sevices.html">SERVICES</a>
+
+  </div>
+
+<script>
+  const openBtn = document.getElementById('openNavBtn');
+  const sidenav = document.getElementById('mySidenav');
+
+  openBtn.addEventListener('click', (e) => {
+    // Toggle menu
+    sidenav.classList.toggle('open');
+
+    // Get position for spark
+    const rect = openBtn.getBoundingClientRect();
+    const offsetX = e.clientX || (rect.left + rect.width / 2);
+    const offsetY = e.clientY || (rect.top + rect.height / 2);
+
+    // Create 10 spark stars
+    for (let i = 0; i < 10; i++) {
+      createStar(offsetX, offsetY);
+    }
+  });
+
+  function createStar(x, y) {
+    const star = document.createElement('div');
+    star.className = 'spark-star';
+    star.innerHTML = '★';
+
+    const size = 10 + Math.random() * 10;
+    star.style.fontSize = `${size}px`;
+
+    // Random direction
+    const dx = (Math.random() - 0.5) * 100 + 'px';
+    const dy = (Math.random() - 0.5) * 100 + 'px';
+    star.style.setProperty('--x', dx);
+    star.style.setProperty('--y', dy);
+
+    // Set position
+    star.style.left = x + 'px';
+    star.style.top = y + 'px';
+
+    // Add to body
+    document.body.appendChild(star);
+
+    // Remove after animation
+    setTimeout(() => {
+      star.remove();
+    }, 700);
+  }
+</script>
+
+
+
+
+
+
+ 
+
+<h1 style="font-size:50px;text-align:center; ">Pollution</h1>
+<p style="font-size:20px;text-align:center;line-height: 30px;margin-bottom: 30px; "> Today we will talk about  the main problem of this high temprature <br>causer  pollution which breakout the ozone layer
+ it is causing ozone layer depletion<br> by which  uv ray of sun by which global warming causes</p>
+<div style="text-align:center; ">
+<a  style="font-size:15px;background-color: lime;padding-left: 18px;padding-right: 18px;padding-top: 18px;padding-bottom: 17px;color: white; "href="pollution impact.html">IMPACT OF POLLUTION</a></div><br>
+<hr style="width: 60%;">
+<h1 style="font-size:50px;text-align:center; ">Pollution impact </h1>
+<img style="width: 100%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJIWue7Hz5aryw02pyGHWoGnF_2czIyZiaVyNsQTeUjdbbLJMY7c0JyI2UHKfHTqxA4nA&usqp=CAU"><br>
+<br>
+<hr style="width: 70%;"><br>
+<div style="text-align:center; ">
+<a  style="font-size:15px;background-color: lime;padding-left: 18px;padding-right: 18px;padding-top: 18px;padding-bottom: 17px;color: white; "href="nature.html">Lets  Play  A  Game</a></div><br>
+<br><hr style="width: 60%;">
+<p style="font-size:20px;text-align:center;line-height: 30px;margin-bottom: 30px; "> AS YOU ALL ENJIOYED GAME VERY WELL BUT YOU NOTICED<br> THAT WHY  I PROVIDE THIS GAME .LET ME EXPLAIN IT THE SNAKE IS INDUSTRIES PRODUCTION AND <BR> 
+THE FOOD WHICH SNAKE IS EATING IS TREES.NOW IT'S YOUR RESPONSIBLITY TO UNDERSTAND IT .<hr style="width: 70%;"><br><br><br><div style="text-align:center; ">
+<a  style="font-size:15px;background-color: lime;padding-left: 18px;padding-right: 18px;padding-top: 18px;padding-bottom: 17px;color: white; "href="causes of pollution.html">CAUSE OF POLLUTION</a></div><br><hr style="width: 60%;"><br><br><br>
+<div style="text-align:center; ">
+
+<a  style="font-size:15px;background-color: lime;padding-left: 18px;padding-right: 18px;padding-top: 18px;padding-bottom: 17px;color: white; "href="prevention from pollution.html">PREVENTION FROM POLLUTION</a></div><br><hr style="width: 60%;"><br><br><br></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nature Preservation Form</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #e0f7e9;
+      color: #2b3a2b;
+    }
+
+    header {
+      background-color: #43a047;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    main {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #ffffff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #388e3c;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-top: 0.3rem;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      padding: 0.7rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #388e3c;
+    }
+
+    .output {
+      margin-top: 2rem;
+      background: #e8f5e9;
+      padding: 1rem;
+      border-radius: 5px;
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #2e7d32;
+      color: white;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Preserve Our Nature 🌿</h1>
+    <p>Tell us your thoughts on protecting the planet!</p>
+  </header>
+
+  <main>
+    <h2>Suggestion Form</h2>
+    <form id="suggestionForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" required />
+
+      <label for="gender">Gender:</label>
+      <select id="gender" required>
+        <option value="">--Select--</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" min="1" required />
+
+      <label for="suggestion">Your Suggestion:</label>
+      <textarea id="suggestion" placeholder="How can we help the environment?" required></textarea>
+
+      <button type="submit">Submit Suggestion</button>
+    </form>
+
+    <div class="output" id="outputBox"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Nature Preservation. Keep Earth Green 🌎</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('suggestionForm');
+    const output = document.getElementById('outputBox');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const gender = document.getElementById('gender').value;
+      const age = document.getElementById('age').value;
+      const suggestion = document.getElementById('suggestion').value;
+
+      output.style.display = 'block';
+      output.innerHTML = `
+        <h3>Thank You for Your Suggestion! 🌱</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Gender:</strong> ${gender}</p>
+        <p><strong>Age:</strong> ${age}</p>
+        <p><strong>Suggestion:</strong><br>${suggestion}</p>
+      `;
+
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>

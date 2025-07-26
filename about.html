@@ -1,0 +1,185 @@
+<div style="text-align:center;">
+<img style="width:30%;"src="https://static.vecteezy.com/system/resources/previews/036/028/197/non_2x/nature-beauty-logo-creative-leaf-color-gradient-gold-fashion-lotus-design-concept-elegant-vector.jpg"></DIV>
+ <style>
+    body {
+     margin: 0;
+      height:500px
+      background-image: url('https://www.shutterstock.com/image-photo/hd-wallpaper-mountains-landscapes-moon-260nw-2389525731.jpg');
+background-repeat: no-repeat;
+    }
+  </style>
+
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      
+      
+      overflow-x: hidden;
+    }
+
+    .topnav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.7);
+      z-index: 1000;
+    }
+
+    #openNavBtn {
+      background: linear-gradient(45deg, #f06, #f79);
+      border: none;
+      color: white;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      position: relative;
+      overflow: visible;
+      box-shadow: 0 0 10px #f06;
+      user-select: none;
+    }
+
+    #openNavBtn:hover {
+      background: linear-gradient(45deg, #f79, #f06);
+    }
+
+    .sidenav {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      height: 0;
+      
+      overflow: hidden;
+      transition: height 0.4s ease;
+      z-index: 900;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+    }
+
+    .sidenav.open {
+      height: 180px;
+    }
+
+    .sidenav a {
+      display: block;
+      padding: 15px 30px;
+      
+      font-size: 18px;
+      text-decoration: none;
+      border-bottom: 1px solid #333;
+      transition: background-color 0.3s;
+    }
+
+    .sidenav a:hover {
+      background-color: #f06;
+      color: white;
+    }
+
+    /* Spark star styles */
+    .spark-star {
+      position: absolute;
+      font-size: 10px;
+      color: gold;
+      animation: star-fly 0.7s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes star-fly {
+      0% {
+        opacity: 1;
+        transform: scale(1) translate(0, 0) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.5) translate(var(--x), var(--y)) rotate(360deg);
+      }
+    }
+  </style>
+
+<body>
+
+  <div class="topnav">
+    <button id="openNavBtn">✨ Menu</button>
+  </div>
+
+  <div id="mySidenav" class="sidenav">
+   <a  href="index.html">HOME</a>
+<a  href="about.html">ABOUT</a>
+<a href="sevices.html">SERVICES</a>
+
+  </div>
+
+<script>
+  const openBtn = document.getElementById('openNavBtn');
+  const sidenav = document.getElementById('mySidenav');
+
+  openBtn.addEventListener('click', (e) => {
+    // Toggle menu
+    sidenav.classList.toggle('open');
+
+    // Get position for spark
+    const rect = openBtn.getBoundingClientRect();
+    const offsetX = e.clientX || (rect.left + rect.width / 2);
+    const offsetY = e.clientY || (rect.top + rect.height / 2);
+
+    // Create 10 spark stars
+    for (let i = 0; i < 10; i++) {
+      createStar(offsetX, offsetY);
+    }
+  });
+
+  function createStar(x, y) {
+    const star = document.createElement('div');
+    star.className = 'spark-star';
+    star.innerHTML = '★';
+
+    const size = 10 + Math.random() * 10;
+    star.style.fontSize = `${size}px`;
+
+    // Random direction
+    const dx = (Math.random() - 0.5) * 100 + 'px';
+    const dy = (Math.random() - 0.5) * 100 + 'px';
+    star.style.setProperty('--x', dx);
+    star.style.setProperty('--y', dy);
+
+    // Set position
+    star.style.left = x + 'px';
+    star.style.top = y + 'px';
+
+    // Add to body
+    document.body.appendChild(star);
+
+    // Remove after animation
+    setTimeout(() => {
+      star.remove();
+    }, 700);
+  }
+</script>
+
+
+
+
+
+
+ 
+
+
+
+
+
+<h1 style="font-size:50px;text-align:center; ">About us</h1>
+<p style="font-size:20px;text-align:center;line-height: 30px;margin-bottom: 30px; ">I am informing to  all  about natures condition<br> and what it's  impact on us  by making this website as a school<br> project  i will answer about your every question and  make you clear about your doubts <p>
+<div style="text-align:center; ">
+<br>
+<hr style="width: 60%;">
