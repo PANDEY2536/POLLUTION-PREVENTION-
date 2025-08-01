@@ -1,158 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Touch Snake Game</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turbo Racer X</title>
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0;
-      font-family: sans-serif;
+      overflow: hidden;
       background: #111;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      font-family: Arial, sans-serif;
     }
-
     canvas {
+      display: block;
+      margin: auto;
       background: #222;
-      margin-top: 20px;
-      touch-action: none;
+      border: 4px solid #fff;
     }
-
     .controls {
-      display: grid;
-      grid-template-columns: 60px 60px 60px;
-      grid-template-rows: 60px 60px;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .btn {
-      background: #444;
-      color: white;
-      border: none;
-      font-size: 24px;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 10px;
-      user-select: none;
+      gap: 20px;
     }
-
-    .btn:active {
-      background: #666;
+    .btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: none;
+      background: #f00;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 0 10px #f00;
+    }
+    .btn.brake {
+      background: #555;
+      box-shadow: 0 0 10px #999;
+    }
+    .score {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: white;
+      font-size: 20px;
     }
   </style>
 </head>
 <body>
-  <h2>Touch Snake Game</h2>
-  <canvas id="game" width="300" height="300"></canvas>
-
+  <canvas id="gameCanvas" width="400" height="600"></canvas>
   <div class="controls">
-    <div></div>
-    <button class="btn" onclick="changeDir(0, -1)">↑</button>
-    <div></div>
-    <button class="btn" onclick="changeDir(-1, 0)">←</button>
-    <button class="btn" onclick="changeDir(0, 1)">↓</button>
-    <button class="btn" onclick="changeDir(1, 0)">→</button>
+    <button class="btn left">⬅️</button>
+    <button class="btn brake">🛑</button>
+    <button class="btn right">➡️</button>
   </div>
-
-  <script>
-    const canvas = document.getElementById("game");
+  <div class="score">Score: 0</div>  <script>
+    const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
-    const gridSize = 15;
-    const tileCount = canvas.width / gridSize;
+    const leftBtn = document.querySelector(".left");
+    const rightBtn = document.querySelector(".right");
+    const brakeBtn = document.querySelector(".brake");
+    const scoreText = document.querySelector(".score");
 
-    let snake = [{ x: 10, y: 10 }];
-    let dx = 1;
-    let dy = 0;
-    let food = spawnFood();
-    let gameOver = false;
+    let player = { x: 180, y: 500, w: 40, h: 80, color: "#0f0", speed: 5 };
+    let enemies = [];
+    let keys = {};
     let score = 0;
 
-    function gameLoop() {
-      if (gameOver) {
-        ctx.fillStyle = "red";
-        ctx.font = "20px sans-serif";
-        ctx.fillText("Game Over!", 90, 150);
-        return;
-      }
+    function drawPlayer() {
+      ctx.fillStyle = player.color;
+      ctx.fillRect(player.x, player.y, player.w, player.h);
+    }
 
-      setTimeout(() => {
-        requestAnimationFrame(gameLoop);
-        update();
-        draw();
-      }, 100);
+    function drawEnemies() {
+      ctx.fillStyle = "#f00";
+      enemies.forEach(e => {
+        ctx.fillRect(e.x, e.y, e.w, e.h);
+      });
+    }
+
+    function moveEnemies() {
+      enemies.forEach(e => e.y += 4);
+      enemies = enemies.filter(e => e.y < canvas.height);
+    }
+
+    function spawnEnemy() {
+      const x = Math.random() * (canvas.width - 40);
+      enemies.push({ x, y: -80, w: 40, h: 80 });
+    }
+
+    function checkCollision() {
+      enemies.forEach(e => {
+        if (
+          player.x < e.x + e.w &&
+          player.x + player.w > e.x &&
+          player.y < e.y + e.h &&
+          player.h + player.y > e.y
+        ) {
+          alert("Game Over! Final Score: " + score);
+          document.location.reload();
+        }
+      });
     }
 
     function update() {
-      const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawPlayer();
+      drawEnemies();
+      moveEnemies();
+      checkCollision();
 
-      // Wrap around edges
-      head.x = (head.x + tileCount) % tileCount;
-      head.y = (head.y + tileCount) % tileCount;
+      if (keys["ArrowLeft"] || keys["left"]) player.x -= player.speed;
+      if (keys["ArrowRight"] || keys["right"]) player.x += player.speed;
+      if (keys["brake"]) player.speed = 2; else player.speed = 5;
 
-      // Collision with self
-      if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
-        gameOver = true;
-        return;
-      }
-
-      snake.unshift(head);
-
-      if (head.x === food.x && head.y === food.y) {
-        food = spawnFood();
-        score++;
-      } else {
-        snake.pop();
-      }
+      player.x = Math.max(0, Math.min(canvas.width - player.w, player.x));
+      score++;
+      scoreText.textContent = "Score: " + score;
+      requestAnimationFrame(update);
     }
 
-    function draw() {
-      ctx.fillStyle = "#222";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    document.addEventListener("keydown", e => keys[e.key] = true);
+    document.addEventListener("keyup", e => keys[e.key] = false);
 
-      // Draw food
-      ctx.fillStyle = "red";
-      ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize - 2, gridSize - 2);
+    leftBtn.addEventListener("touchstart", () => keys["left"] = true);
+    leftBtn.addEventListener("touchend", () => keys["left"] = false);
+    rightBtn.addEventListener("touchstart", () => keys["right"] = true);
+    rightBtn.addEventListener("touchend", () => keys["right"] = false);
+    brakeBtn.addEventListener("touchstart", () => keys["brake"] = true);
+    brakeBtn.addEventListener("touchend", () => keys["brake"] = false);
 
-      // Draw snake
-      ctx.fillStyle = "lime";
-      for (const segment of snake) {
-        ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
-      }
-
-      // Score
-      ctx.fillStyle = "white";
-      ctx.font = "14px sans-serif";
-      ctx.fillText("Score: " + score, 10, 20);
-    }
-
-    function spawnFood() {
-      let x, y;
-      do {
-        x = Math.floor(Math.random() * tileCount);
-        y = Math.floor(Math.random() * tileCount);
-      } while (snake.some(s => s.x === x && s.y === y));
-      return { x, y };
-    }
-
-    function changeDir(x, y) {
-      if (-x === dx && -y === dy) return; // prevent reversing
-      dx = x;
-      dy = y;
-    }
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowUp") changeDir(0, -1);
-      if (e.key === "ArrowDown") changeDir(0, 1);
-      if (e.key === "ArrowLeft") changeDir(-1, 0);
-      if (e.key === "ArrowRight") changeDir(1, 0);
-    });
-
-    gameLoop();
-  </script>
-</body>
+    setInterval(spawnEnemy, 1000);
+    update();
+  </script></body>
 </html>
